@@ -1,7 +1,7 @@
 /node_modules
 /public/storage
 /storage/*.key
-/vendor
+/vendor/*
 !/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php
 /.idea
 Homestead.json
