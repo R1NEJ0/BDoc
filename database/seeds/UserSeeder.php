@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $admin->nick = 'admin';
         $admin->email = 'mail@mail.com';
         $admin->password = bcrypt('123456');
-        $admin->rol = 'admin';
+        $admin->role = 'admin';
         $admin->save();
 
         //
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                'nick' => $faker->userName,
                 'email' => $faker->email,
                 'password' => bcrypt('123456'),
-                'rol' => 'user',
+                'role' => 'user',
 
             ));
         }
