@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         //
         $admin = new User;
 
-        $admin->nick = 'admin';
+        $admin->username = 'admin';
         $admin->email = 'mail@mail.com';
         $admin->password = bcrypt('123456');
         $admin->role = 'admin';
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         $faker = Faker::create();
         for ($i=0; $i < 100; $i++) {
             $id = \DB::table('users')->insertGetId(array(
-               'nick' => $faker->userName,
+               'username' => $faker->userName,
                 'email' => $faker->email,
                 'password' => bcrypt('123456'),
                 'role' => 'user',
