@@ -18,6 +18,19 @@ class LoginController extends Controller
     |
     */
 
+    /*
+     *  rewrite this on authenticatesUsers to be able to login with mail or username
+      protected function credentials(Request $request)
+    {
+        $loginInput = trim($request->{$this->username()});
+        $findColumn = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : $this->username();
+
+        return [$findColumn => $loginInput, 'password' => $request->password];
+    }
+     *
+     *
+     */
+
     use AuthenticatesUsers;
 
     /**
