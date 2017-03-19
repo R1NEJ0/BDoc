@@ -79,7 +79,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Inicio</a>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Registrarse</a>
@@ -88,7 +88,9 @@
             @endif
 
             <div class="content">
-                <img src="images/logo.png" class="img-responsive"  width="50%" height="50%">
+                <a href="{{ url('/home') }}">
+                    <img src="images/logo.png" class="img-responsive"  width="50%" height="50%">
+                </a>
 
                 <div class="title m-b-md">
                     BDoc

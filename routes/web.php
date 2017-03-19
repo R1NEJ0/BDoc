@@ -18,3 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/upload', 'UserController@upload');
+
+Route::get('/search', 'UserController@search');
+
