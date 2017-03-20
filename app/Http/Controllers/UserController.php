@@ -30,7 +30,11 @@ class UserController extends Controller
         }else{
             return view('home');
         }
+    }
 
+    public function config(){
+
+        return view('config');
 
     }
 

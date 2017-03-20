@@ -72,7 +72,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">
+                                    <li><a href="{{ url('/config') }}">
                                             Configuración
                                         </a>
                                     </li>

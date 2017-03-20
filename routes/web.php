@@ -25,4 +25,4 @@ Route::get('/search', 'UserController@search');
 
 Route::get('/dashboard', 'UserController@dashboard');
 
-Route::get('/configuration', 'UserController@configuration');
+Route::get('/config', 'UserController@config');
