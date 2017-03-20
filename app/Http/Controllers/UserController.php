@@ -15,9 +15,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function upload(){
-        return view('upload');
-    }
+
 
     public function search(){
         return view('search');

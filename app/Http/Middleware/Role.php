@@ -7,11 +7,7 @@ use Closure;
 class Role
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * Middleware de Styde.net
      */
     protected $permission = [
 

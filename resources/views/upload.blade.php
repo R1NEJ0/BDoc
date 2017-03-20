@@ -8,7 +8,17 @@
                     <div class="panel-heading">Subir fichero</div>
 
                     <div class="panel-body">
-                        Selecciona fichero...
+                        <form method="POST" action="{{ url('/upload') }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+
+                            <input type="file" name="file ">
+
+                            <br/>
+
+                            <button type="submit" class="btn btn-primary">Subir fichero</button>
+
+
+                        </form>
                     </div>
                 </div>
             </div>

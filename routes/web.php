@@ -22,7 +22,8 @@ Route::get('/home', [
     'uses' => 'HomeController@index'
 ]);
 
-Route::get('/upload', 'UserController@upload');
+Route::get('/upload', 'FileController@upload');
+Route::post('/upload', 'FileController@uploadFile');
 
 Route::get('/search', 'UserController@search');
 
