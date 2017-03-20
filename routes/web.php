@@ -23,3 +23,6 @@ Route::get('/upload', 'UserController@upload');
 
 Route::get('/search', 'UserController@search');
 
+Route::get('/dashboard', 'UserController@dashboard');
+
+Route::get('/configuration', 'UserController@configuration');

@@ -76,6 +76,14 @@
                                             Configuración
                                         </a>
                                     </li>
+                                @if(Auth::user()->role === 'admin')
+                                    <li>
+                                        <a href="{{ url('/dashboard') }}">
+                                            Panel de administración
+                                        </a>
+                                    </li>
+                                @endif
+
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
