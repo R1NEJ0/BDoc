@@ -23,14 +23,6 @@ class UserController extends Controller
         return view('search');
     }
 
-    public function dashboard(){
-
-        if (Auth::user()->role == 'admin'){
-            return view('dashboard');
-        }else{
-            return view('home');
-        }
-    }
 
     public function config(){
 

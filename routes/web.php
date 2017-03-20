@@ -17,12 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', [
+    'as' => 'home',
+    'uses' => 'HomeController@index'
+]);
 
 Route::get('/upload', 'UserController@upload');
 
 Route::get('/search', 'UserController@search');
 
-Route::get('/dashboard', 'UserController@dashboard');
-
 Route::get('/config', 'UserController@config');
+
+Route::group(['middleware' => 'isAdmin:admin'], function (){
+
+    Route::get('/dashboard', function (){
+        return view('admin.dashboard');
+    });
+});
+
+
+
