@@ -28,6 +28,6 @@ class UserController extends Controller
         return view('config');
 
     }
-    
+
 
 }
