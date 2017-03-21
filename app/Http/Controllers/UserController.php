@@ -17,6 +17,7 @@ class UserController extends Controller
 
 
 
+
     public function search(){
         return view('search');
     }
@@ -27,5 +28,6 @@ class UserController extends Controller
         return view('config');
 
     }
+    
 
 }

@@ -8,14 +8,16 @@
                     <div class="panel-heading">Subir fichero</div>
 
                     <div class="panel-body">
-                        <form method="POST" action="{{ url('/upload') }}" enctype="multipart/form-data">
+                        <form action="{{('/upload')}}" method="post" role="form" class="form-horizontal"  enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="file" class="col-md-4 control-label">Fichero</label>
+                                <div class="col-md-6">
+                                    <input type="file" id="file" name="file" class="form-control">
+                                </div>
+                            </div>
 
-                            <input type="file" name="file ">
-
-                            <br/>
-
-                            <button type="submit" class="btn btn-primary">Subir fichero</button>
+                            <input type="submit" class="btn btn-primary">
 
 
                         </form>
@@ -25,3 +27,5 @@
         </div>
     </div>
 @endsection
+
+

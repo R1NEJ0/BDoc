@@ -22,6 +22,7 @@ Route::get('/home', [
     'uses' => 'HomeController@index'
 ]);
 
+
 Route::get('/upload', 'FileController@upload');
 Route::post('/upload', 'FileController@uploadFile');
 

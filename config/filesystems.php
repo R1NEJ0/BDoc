@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => 'file',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,6 +42,11 @@ return [
     */
 
     'disks' => [
+
+        'file' => [
+            'driver' => 'local',
+            'root' => public_path('files'),
+        ],
 
         'local' => [
             'driver' => 'local',
