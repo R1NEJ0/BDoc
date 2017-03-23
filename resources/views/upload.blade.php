@@ -32,10 +32,23 @@
                                 </div>
                             </div>
 
+
+
+                                <div class="form-group">
+                                <p>
+                                    Vanilla example — the absolute minimum amount of code required, no configuration. No autocomplete, either. See the other examples for that.
+                                </p>
+                                <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all"><li class="tagit-new"><input type="text" class="ui-widget-content ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span></li></ul>
+                                <input type="submit" value="Submit">
+                                </div>
+
+
+
+
                             <div class="form-group">
-                                <label for="keywords" class="col-md-4 control-label">Palabras clave</label>
+                                <label for="keykords" class="col-md-4 control-label">Palabras clave</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="keywords" name="keywords" class="form-control">
+                                    <input type="text" id="keykords" name="keywords" class="form-control">
                                 </div>
                             </div>
 
