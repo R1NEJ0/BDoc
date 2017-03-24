@@ -20,11 +20,10 @@ class CreateFileTable extends Migration
             $table->string('fileName');
             $table->string('fileExtension');
             $table->string('name');
-            $table->integer('like');
-            $table->integer('dislike');
             $table->string('description');
             $table->string('keywords');
             $table->string('url');
+            $table->string('avatar');
             $table->softDeletes();
 
             $table->integer('user_id')->unsigned();

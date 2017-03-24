@@ -11,9 +11,9 @@
                         <form action="{{('/upload')}}" method="post" role="form" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="avatarImg" class="col-md-4 control-label">Imagen</label>
+                                <label for="thumbnail" class="col-md-4 control-label">Imagen</label>
                                 <div class="col-md-6">
-                                    <input type="file" id="avatarImg" name="avatarImg" class="form-control">
+                                    <input type="file" id="thumbnail" name="thumbnail" class="form-control">
                                 </div>
                             </div>
 
@@ -34,13 +34,7 @@
 
 
 
-                                <div class="form-group">
-                                <p>
-                                    Vanilla example — the absolute minimum amount of code required, no configuration. No autocomplete, either. See the other examples for that.
-                                </p>
-                                <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all"><li class="tagit-new"><input type="text" class="ui-widget-content ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span></li></ul>
-                                <input type="submit" value="Submit">
-                                </div>
+
 
 
 

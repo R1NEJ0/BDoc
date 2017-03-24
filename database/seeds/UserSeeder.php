@@ -22,6 +22,14 @@ class UserSeeder extends Seeder
         $admin->role = 'admin';
         $admin->save();
 
+        $user = new User;
+
+        $user->username = 'usuario';
+        $user->email = 'user@mail.com';
+        $user->password = bcrypt('123456');
+        $user->role = 'user';
+        $user->save();
+
         //
 
         $faker = Faker::create();

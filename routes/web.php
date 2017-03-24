@@ -17,10 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+/*
 Route::get('/home', [
     'as' => 'home',
     'uses' => 'HomeController@index'
 ]);
+
+*/
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/upload', 'FileController@upload');
