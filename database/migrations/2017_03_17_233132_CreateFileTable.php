@@ -23,7 +23,8 @@ class CreateFileTable extends Migration
             $table->string('description');
             $table->string('keywords');
             $table->string('url');
-            $table->string('avatar');
+            $table->string('thumbnailName');
+            $table->string('thumbnailURL');
             $table->softDeletes();
 
             $table->integer('user_id')->unsigned();

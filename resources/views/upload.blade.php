@@ -25,6 +25,14 @@
                             </div>
 
 
+
+                            <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all">
+                                <li class="tagit-new">
+                                    <input type="text" class="ui-widget-content ui-autocomplete-input" autocomplete="off">
+                                </li>
+                            </ul>
+
+
                             <div class="form-group">
                                 <label for="description" class="col-md-4 control-label">Descripción</label>
                                 <div class="col-md-6">

@@ -6,6 +6,7 @@ use App\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 
 
 class FileController extends Controller
@@ -35,8 +36,6 @@ class FileController extends Controller
 
         $file = $request->file('file');
 
-
-
         $fileName = time() . '_' . $file->getClientOriginalName();
 
         return $fileName;
@@ -51,20 +50,51 @@ class FileController extends Controller
         return $extension;
     }
 
+    private function thumbnailName($request){
+
+        $name = $request->file('thumbnail')
+                        ->getClientOriginalName();
+
+        $name = str_replace(' ', '_', $name);
+
+        return 'th_'. time() . '_' . $name;
+
+    }
+
     private function thumbnail($request){
 
         $file = $request->file('thumbnail');
 
         //store
 
-        $thumbnail = 'th' . '_' . time();
+
+
+        $thumbnail = 'th' . '_' . time() . '.' . $file->guessClientExtension();
 
 
 
         return $thumbnail;
     }
 
+    private function getFileName($request){
 
+        $file = $request->file('file');
+
+        return $file->name;
+    }
+
+    public function storeFile($request){
+
+        $name = $request->file('thumbnail')
+            ->store('file');
+
+        return $name;
+
+        //Storage::disk('file')->put($this->thumbnailName(), file_get_contents($img->getRealPath() ) );
+
+
+
+    }
 
     public function uploadFile(Request $request)
     {
@@ -87,7 +117,9 @@ class FileController extends Controller
 
         $file->user_id = Auth::user()->id;
 
-        $file->avatar = $this->thumbnail($request);
+        $file->thumbnailName = $this->thumbnailName($request);
+
+        $file->thumbnailURL = $this->thumbnailName($request);
 
         $file->save();
 

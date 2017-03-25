@@ -45,7 +45,7 @@ return [
 
         'file' => [
             'driver' => 'local',
-            'root' => public_path('files'),
+            'root' => storage_path('files'),
         ],
 
         'local' => [
@@ -55,7 +55,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public/files'),
             'visibility' => 'public',
         ],
 
