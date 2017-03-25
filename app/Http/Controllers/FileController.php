@@ -61,6 +61,18 @@ class FileController extends Controller
 
     }
 
+    private function getUserID(){
+        $user = Auth::user()->id;
+
+        return $user;
+    }
+
+    private function getIMGPath(){
+        $IMGPath = $this->getUserID() . '/th';
+
+        return $IMGPath;
+    }
+
     private function thumbnail($request){
 
         $file = $request->file('thumbnail');
@@ -85,8 +97,12 @@ class FileController extends Controller
 
     public function storeFile($request){
 
+        $this->validate($request, [
+            'thumbnail' => 'required|image'
+        ]);
+
         $img = $request->file('thumbnail')
-            ->store('file');
+            ->store($this->getIMGPath());
 
         return $img;
 
