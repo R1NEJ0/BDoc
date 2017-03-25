@@ -85,10 +85,10 @@ class FileController extends Controller
 
     public function storeFile($request){
 
-        $name = $request->file('thumbnail')
+        $img = $request->file('thumbnail')
             ->store('file');
 
-        return $name;
+        return $img;
 
         //Storage::disk('file')->put($this->thumbnailName(), file_get_contents($img->getRealPath() ) );
 
@@ -120,6 +120,8 @@ class FileController extends Controller
         $file->thumbnailName = $this->thumbnailName($request);
 
         $file->thumbnailURL = $this->thumbnailName($request);
+
+        $this->storeFile($request);
 
         $file->save();
 
