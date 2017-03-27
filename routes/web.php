@@ -35,11 +35,11 @@ Route::get('/search', 'UserController@search');
 
 Route::get('/config', 'UserController@config');
 
+Route::get('/edit', 'UserController@edit');
+
 Route::group(['middleware' => 'isAdmin:admin'], function (){
 
-    Route::get('/dashboard', function (){
-        return view('admin.dashboard');
-    });
+    Route::get('/dashboard', 'AdminController@index');
 });
 
 

@@ -15,6 +15,17 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function edit($id){
+        $user = User::findOrFail(Auth::user()->id);
+
+        dd($user);
+
+        return view('admin.users.edit', compact('user'));
+
+
+
+    }
+
 
 
 
