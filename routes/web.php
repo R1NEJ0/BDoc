@@ -42,5 +42,16 @@ Route::group(['middleware' => 'isAdmin:admin'], function (){
     Route::get('/dashboard', 'AdminController@index');
 });
 
+Route::get('/file', function (){
+    return view ('file');
+});
+
+Route::get('/editf', function (){
+    return view('editf');
+});
+
+Route::get('/comment', function (){
+    return view('comment');
+});
 
 

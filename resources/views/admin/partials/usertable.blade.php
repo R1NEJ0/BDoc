@@ -1,11 +1,11 @@
 <table class="table table-striped">
     <tr>
-        <th>#</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Rol</th>
-        <th>Última subida</th>
-        <th>Carisma</th>
+        <th><a href="/index">#</a></th>
+        <th><a href="/orderByUsername">Username</a></th>
+        <th><a href="/orderByEmail">Email</a></th>
+        <th><a href="/orderByRole">Rol</a></th>
+        <th><a href="/orderByLastUpdate">Última subida</a></th>
+        <th><a href="/orderByCharisma">Carisma</a></th>
         <th></th>
         <th>Acción</th>
         <th></th>

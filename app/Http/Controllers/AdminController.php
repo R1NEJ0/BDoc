@@ -23,9 +23,34 @@ class AdminController extends Controller
 
     }
 
+
+    public function sortByUsername(){
+        $users = User::orderBy('username')->paginate(10);
+        return view('admin.dashboard', [
+            'users' => $users
+        ]);
+    }
+
+    public function sortByCharisma(){
+
+    }
+
+    public function sortByLastUpdate(){
+
+    }
+
+    public function sortByEmail(){
+        $users = User::orderBy('email')->paginate(10);
+        return view('admin.dashboard', [
+            'users' => $users
+        ]);
+    }
+
     public function edit(){
 
     }
+
+
 
 
 }

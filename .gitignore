@@ -9,3 +9,5 @@ Homestead.yaml
 
 !/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php
 vendor/
+
+storage/files/file/e3d69200c2af9bfacc45a4fc5b858c1d.png
