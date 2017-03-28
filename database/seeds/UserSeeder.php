@@ -35,34 +35,13 @@ class UserSeeder extends Seeder
         $faker = Faker::create();
         for ($i=0; $i < 100; $i++) {
             $id = \DB::table('users')->insertGetId(array(
-               'username' => $faker->userName,
+                'created_at' => $faker->dateTime,
+                'username' => $faker->userName,
                 'email' => $faker->email,
                 'password' => bcrypt('123456'),
                 'role' => 'user',
 
             ));
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

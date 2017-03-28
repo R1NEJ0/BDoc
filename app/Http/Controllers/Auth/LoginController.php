@@ -16,7 +16,19 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
+    |    On Credentials:
+    |
+    |   $loginInput = trim($request->{$this->username()});
+    |   $findColumn = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : $this->username();
+    |
+    |   return [$findColumn => $loginInput, 'password' => $request->password];
+    |
+    |   On Username:
+    |
+    |   'username'
     */
+
+
     
 
     use AuthenticatesUsers;

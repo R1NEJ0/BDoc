@@ -35,7 +35,7 @@
                                 </tr>
                                 <tr>
                                     <td>Fecha de subida:</td>
-                                    <td>XX / XX / XX</td>
+                                    <td>XX / XX / XX    -     Hace XXX días</td>
                                 </tr>
                                 <tr>
                                     <td>Likes: </td>

@@ -15,8 +15,7 @@ class CreateValorationsTable extends Migration
     {
         Schema::create('valorations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('like');
-            $table->integer('dislike');
+            $table->boolean('like');
             $table->timestamps();
 
             $table->integer('user_id')->unsigned();
