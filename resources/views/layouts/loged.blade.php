@@ -27,11 +27,7 @@
 
 
     </script>
-    <script>
-        $(document).ready(function() {
-            $("#myTags").tagit();
-        });
-    </script>
+
 </head>
 <body>
     <div id="app">
@@ -91,7 +87,7 @@
                                     </li>
                                 @if(Auth::user()->role === 'admin')
                                     <li>
-                                        <a href="{{ url('/dashboard') }}">
+                                        <a href="{{ url('/admin/panel') }}">
                                             Panel de administración
                                         </a>
                                     </li>

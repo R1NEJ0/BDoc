@@ -39,7 +39,13 @@ Route::get('/edit', 'UserController@edit');
 
 Route::group(['middleware' => 'isAdmin:admin'], function (){
 
-    Route::get('/dashboard', 'AdminController@index');
+    Route::get('/admin/panel', 'AdminController@index');
+
+    Route::get('/admin/user/edit/{user}', 'AdminController@edit')->name('admin.user.edit');
+
+    Route::get('/admin/user/profile/{user}', 'AdminController@profile')->name('admin.user.profile');
+
+    Route::get('/admin/user/destroy/{user}', 'AdminController@destroy')->name('admin.user.destroy');
 });
 
 Route::get('/file', function (){
@@ -53,5 +59,9 @@ Route::get('/editf', function (){
 Route::get('/comment', function (){
     return view('comment');
 });
+
+Route::get('/pruebas', 'UserController@lists');
+
+
 
 

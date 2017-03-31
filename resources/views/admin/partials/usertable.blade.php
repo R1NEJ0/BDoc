@@ -21,9 +21,9 @@
             <td>{{ $user->role }}</td>
             <td> Última subida </td>
             <td> Carisma </td>
-            <td><a href="#" class="btn btn-success">Ver</a></td>
-            <td><a href="#" class="btn btn-primary">Editar</a></td>
-            <td><a href="#" class="btn btn-danger">Eliminar</a></td>
+            <td><a href="{{ route('admin.user.profile', $user->id) }}" class="btn btn-success">Ver</a></td>
+            <td><a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-primary">Editar</a></td>
+            <td><a href="{{ route('admin.user.destroy', $user->id) }}" class="btn btn-danger">Eliminar</a></td>
 
 
         </tr>

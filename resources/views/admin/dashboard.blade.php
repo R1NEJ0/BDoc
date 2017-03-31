@@ -20,6 +20,7 @@
                                 <option value="/sortByLastUpdate">Última subida</option>
                                 <option value="/sortByCharisma">Carisma</option>
                             </select>
+                            <input type="submit" class="btn btn-xs btn-primary">
                         </h5>
                     </div>
 

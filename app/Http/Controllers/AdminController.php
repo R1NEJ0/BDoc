@@ -46,7 +46,11 @@ class AdminController extends Controller
         ]);
     }
 
-    public function edit(){
+    public function edit($id){
+
+        $user = User::find($id);
+
+        return view('admin.partials.useredit')->with('user', $user);
 
     }
 

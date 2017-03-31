@@ -11,4 +11,9 @@ class Comment extends Model
     protected $fillable = [
       'comment',
     ];
+
+    public function file()
+    {
+        return $this->belongsTo('App\File');
+    }
 }
