@@ -21,18 +21,18 @@
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-striped">
                                 <tbody>
-
+                                @foreach($files as $file)
                                 <tr>
                                     <td>Tamaño:</td>
-                                    <td>100 mb</td>
+                                    <td>{{ $file->size }}</td>
                                 </tr>
                                 <tr>
                                     <td>Extensión: </td>
-                                    <td>rar</td>
+                                    <td>{{ $file->fileExtension }}}</td>
                                 </tr>
                                 <tr>
                                     <td>Fecha de subida:</td>
-                                    <td>XX / XX / XX    -     Hace XXX días</td>
+                                    <td>{{ $file->created_at }} -     Hace XXX días</td>
                                 </tr>
                                 <tr>
                                     <td>Likes: </td>
@@ -44,20 +44,21 @@
                                 </tr>
                                 <tr>
                                     <td>Uploader:</td>
-                                    <td>User</td>
+                                    <td>{{ $file->user_id }}</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Tags:
                                     </td>
                                     <td>
-                                        asd asd asd asd asd asd
+                                        {{ $file->keywords }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Descripción</td>
-                                    <td>Esto es una descripción</td>
+                                    <td>{{ $file->description }}</td>
                                 </tr>
+                                @endforeach
 
                                 </tbody>
                             </table>

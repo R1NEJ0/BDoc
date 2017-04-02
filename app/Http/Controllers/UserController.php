@@ -18,6 +18,45 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+
+    public function userIndex($id)
+    {
+
+
+        $user = User::findOrFail($id);
+
+        $tiempo = $this->calculoDias($id);
+
+        $files = $this->files($id);
+
+        return view('home', compact('user', 'tiempo', 'files'));
+    }
+
+    protected function calculoDias($id)
+    {
+
+
+        $raw= File::select('created_at')->where('user_id', $id)->orderBy('created_at', 'desc')->get()->take(1);
+
+        $array = $raw->toArray();
+
+        $cDate = Carbon::parse($array[0]['created_at']);
+
+        $cToday = Carbon::now();
+
+        $lastFileinDays = $cDate->diffInDays($cToday);
+
+        $difference = 28 - $lastFileinDays;
+
+        return $difference;
+
+
+
+
+
+    }
+
+
     public function edit($id){
         $user = User::findOrFail(Auth::user()->id);
 
@@ -26,12 +65,6 @@ class UserController extends Controller
 
 
     }
-
-    public function dateCreated()
-    {
-
-    }
-
 
 
     public function search(){
@@ -45,17 +78,16 @@ class UserController extends Controller
 
     }
 
-    public function lists(){
+    public function files($id){
 
-        $user = Auth::user()->id;
+        $files = File::all()->where('user_id', $id);
 
-        $files = File::all()->where('user_id', $user);
-
-        return view('partials.file.fileinfo');
+        return $files;
 
 
 
     }
+
 
 
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
@@ -27,5 +28,12 @@ class File extends Model
     public function valorations()
     {
         return $this->hasMany('App\Valoration');
+    }
+
+    public function getDayUploadedAttribute()
+    {
+        return Carbon::parse($this->created_at)->day;
+
+
     }
 }

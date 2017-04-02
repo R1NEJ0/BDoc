@@ -25,7 +25,12 @@ Route::get('/home', [
 
 */
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function (){
+    return redirect('/profile');
+})->name('home');
+
+
+Route::get('/profile/{user?}', 'UserController@profile')->name('profile');
 
 
 Route::get('/upload', 'FileController@upload');
@@ -60,7 +65,7 @@ Route::get('/comment', function (){
     return view('comment');
 });
 
-Route::get('/pruebas', 'UserController@lists');
+Route::get('/pruebas/{user?}', 'UserController@userIndex');
 
 
 

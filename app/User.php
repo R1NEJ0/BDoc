@@ -34,6 +34,7 @@ class User extends Authenticatable
 
     public function files()
     {
+
         return $this->hasMany('App\File');
     }
 
@@ -41,5 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Comment');
     }
+
+
+
+
 
 }

@@ -2,7 +2,7 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
-                <h4 class="pull-left">Ficheros subidos por {{ Auth::user()->username }} </h4>
+                <h4 class="pull-left">Ficheros subidos por {{ $user->username }} </h4>
                 <h5 class="pull-right">
                     Buscar:
                     <input type="text">
@@ -30,32 +30,38 @@
                         <th>
                             Comentarios
                         </th>
+
                         <th>
                             Acción
                         </th>
                     </tr>
+                    @foreach($files as $file)
+                        <tr>
                     <td>
-                        <a href="/file">Nombre1Nombre1Nombre1Nombre1Nombre1Nombre1Nombre1</a>
+                        <a href="/file">{{ $file->name  }}</a>
                     </td>
                     <td>
-                        Extensión1
+                        {{ $file->fileExtension }}
                     </td>
                     <td>
-                        Tamaño1
+                        {{ $file->size }} MB
                     </td>
                     <td>
-                        100
+                        XX
                     </td>
                     <td>
-                        10
+                        XX
                     </td>
                     <td>
-                        30
+                        XX
                     </td>
                     <td>
                         <a href="/editf" class="btn btn-primary">Editar</a>
                         <a href="#" class="btn btn-danger">Borrar</a>
+                        <a href="#" class="btn btn-success">Descargar</a>
                     </td>
+                        </tr>
+                        @endforeach
 
                 </table>
             </div>

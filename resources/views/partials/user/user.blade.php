@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Perfil de {{ Auth::user()->username   }}</div>
+                <div class="panel-heading">Perfil de {{ $user->username}}</div>
                 <div class="panel-body">
 
                     <div class="row">
@@ -18,15 +18,15 @@
                                 <tbody>
                                 <tr>
                                     <td>Último fichero:</td>
-                                    <td>XX / XX / XX</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>Días restantes:</td>
-                                    <td>28 días</td>
+                                    <td>{{$tiempo}} días</td>
                                 </tr>
                                 <tr>
                                     <td>Fecha de registro:</td>
-                                    <td>XX / XX / XX</td>
+                                    <td>{{ $user->created_at }}</td>
                                 </tr>
                                 <tr>
                                     <td>Puntos de carisma: </td>
