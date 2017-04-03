@@ -23,9 +23,10 @@ class UserController extends Controller
 
     public function userIndex($id)
     {
-       $likes = $this->filesValorations($id)->sum('like');
 
-        $cantidadFicheros = $this->cantidadFicheros($id);
+
+
+       // $cantidadFicheros = $this->cantidadFicheros($id);
 
         $mensajes = $this->cantidadMensajes($id);
 
@@ -39,30 +40,38 @@ class UserController extends Controller
 
         $files = $this->files($id);
 
-        return view('home', compact('user', 'tiempo', 'files', 'carisma', 'ultimofichero', 'mensajes', 'cantidadFicheros', 'likes'));
+        return view('home', compact('user', 'tiempo', 'files', 'carisma',
+                                    'ultimofichero', 'mensajes'));
     }
 
     protected function calculoDias($id)
     {
 
+        //$raw= File::select('created_at')->where('user_id', $id)->orderBy('created_at', 'desc')->get()->take(1);
+
+        $raw = File::all()->where('user_id', $id)->sortByDesc('created_at')->first();
 
 
-        $raw= File::select('created_at')->where('user_id', $id)->orderBy('created_at', 'desc')->get()->take(1);
+        if (is_null($raw)){
 
-        $array = $raw->toArray();
+            $noFile = User::find($id);
 
-        $cDate = Carbon::parse($array[0]['created_at']);
+            $raw = $noFile;
+
+        }else{
+
+             $raw;
+        }
 
         $cToday = Carbon::now();
 
-        $lastFileinDays = $cDate->diffInDays($cToday);
+        $lastFileinDays = $raw->created_at->diffInDays($cToday);
 
         $difference = 28 - $lastFileinDays;
 
         return $difference;
 
     }
-
 
     public function edit($id){
         $user = User::findOrFail(Auth::user()->id);
@@ -74,32 +83,44 @@ class UserController extends Controller
     }
 
 
-    // CalculoCarisma esta mál, la BD el user es quien valora no el valorado.
-
     protected function calculoCarisma($id)
     {
 
-        $ValorationPerUser = Valoration::where('user_id', $id);
+        $fileValoration = DB::table('valorations')
+            ->join('files', 'valorations.file_id', '=', 'files.id')
+            ->join('users', 'files.user_id', '=', 'users.id')
+            ->where('users.id', $id)->get();
 
-        $totalLikes = $ValorationPerUser->count();
+        // Editar y poner en constructor, mejor ya que vamos a usar esto varias veces.
 
-        $sumaLikes = $ValorationPerUser->sum('like');
+        $likesum = $fileValoration->sum('like');
 
-        $sumaDislikes = $totalLikes - $sumaLikes;
+        $dislikesum = $fileValoration->count() - $likesum;
 
-        $DislikesRatio = $sumaDislikes * 0.2;
+        $dislikeratio = $dislikesum * 0.1;
 
-        $resultado = $sumaLikes - $DislikesRatio;
+        $charisma = $likesum/10 - $dislikeratio;
 
-        return $resultado;
+        return $charisma;
+
 
     }
 
     protected function ultimoFichero($id)
     {
-        $ultimoFichero = User::find($id)->files->sortByDesc('created_at')->first()->toArray();
+        $ultimoFichero = User::find($id)->files->sortByDesc('created_at')->first();
 
-        return $ultimoFichero['name'];
+        if (is_null($ultimoFichero)){
+
+            $ultimoFichero = [
+                'name' => 'El usuario aún no ha subido ningún fichero'
+            ];
+
+            return $ultimoFichero['name'];
+        }else{
+            return $ultimoFichero['name'];
+
+        }
     }
 
     protected function cantidadMensajes($id)
@@ -117,11 +138,9 @@ class UserController extends Controller
 
     }
 
-
     public function search(){
         return view('search');
     }
-
 
     public function config(){
 
@@ -137,30 +156,9 @@ class UserController extends Controller
 
     }
 
-    public function filesValorations($id){
-
-        $fileValoration = DB::table('valorations')
-                            ->join('files', 'valorations.file_id', '=', 'files.id')
-                            ->join('users', 'files.user_id', '=', 'users.id')
-                            ->where('users.id', $id)->get();
-
-        // Editar y poner en constructor, mejor ya que vamos a usar esto varias veces.
-
-        $likesum = $fileValoration->sum('like');
-
-        $dislikesum = $fileValoration->count() - $likesum;
-
-        $dislikeratio = $dislikesum * 0.1;
-
-        $charisma = $likesum/10 - $dislikeratio;
 
 
 
-        return $fileValoration;
-
-
-
-    }
 
 
 

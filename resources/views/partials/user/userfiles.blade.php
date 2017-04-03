@@ -47,13 +47,13 @@
                         {{ $file->size }} MB
                     </td>
                     <td>
-                        {{ $likes }}
+                        {{ $file->valorations->where('like', 1)->count() }}
                     </td>
                     <td>
-                        XX
+                       {{ $file->valorations->where('like', 0)->count() }}
                     </td>
                     <td>
-                        XX
+                        {{ $file->comments->count() }}
                     </td>
                     <td>
                         <a href="/editf" class="btn btn-primary">Editar</a>

@@ -38,7 +38,7 @@
                                 </tr>
                                 <tr>
                                     <td>Número de ficheros subidos:</td>
-                                    <td>{{ $cantidadFicheros }}</td>
+                                    <td>{{ $files->count() }}</td>
                                 </tr>
 
                                 </tbody>
