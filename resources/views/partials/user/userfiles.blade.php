@@ -47,7 +47,7 @@
                         {{ $file->size }} MB
                     </td>
                     <td>
-                        XX
+                        {{ $likes }}
                     </td>
                     <td>
                         XX

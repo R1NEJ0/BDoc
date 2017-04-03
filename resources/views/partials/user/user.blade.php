@@ -18,10 +18,10 @@
                                 <tbody>
                                 <tr>
                                     <td>Último fichero:</td>
-                                    <td></td>
+                                    <td> {{ $ultimofichero }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Días restantes:</td>
+                                    <td>Días restantes para el ban:</td>
                                     <td>{{$tiempo}} días</td>
                                 </tr>
                                 <tr>
@@ -30,15 +30,15 @@
                                 </tr>
                                 <tr>
                                     <td>Puntos de carisma: </td>
-                                    <td>XXXXXXX</td>
+                                    <td>{{ $carisma }}</td>
                                 </tr>
                                 <tr>
                                     <td>Comentarios: </td>
-                                    <td>XXX</td>
+                                    <td> {{ $mensajes }}</td>
                                 </tr>
                                 <tr>
                                     <td>Número de ficheros subidos:</td>
-                                    <td>XXXXXX</td>
+                                    <td>{{ $cantidadFicheros }}</td>
                                 </tr>
 
                                 </tbody>
