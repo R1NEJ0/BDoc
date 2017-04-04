@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
+use DB;
 
 class User extends Authenticatable
 {
@@ -28,6 +29,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // Relaciones //
+
     public function profile()
     {
         return $this->hasOne('App\Profile');
@@ -44,6 +47,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment');
     }
 
+    // Atributos propios //
+
     public function getLastAttribute()
     {
         $lastFile = $this->files()->orderBy('created_at', 'desc')->first();
@@ -51,7 +56,7 @@ class User extends Authenticatable
         if (is_null($lastFile)) {
 
             $lastFile = [
-                'created_at' => 'Sin fichero aún'
+                'created_at' => 'Sin ficheros aún'
             ];
 
             return $lastFile['created_at'];
@@ -85,6 +90,27 @@ class User extends Authenticatable
         $userCreated = Carbon::parse($this->created_at);
 
         return $userCreated->format('d M Y');
+    }
+
+    public function getCharismaAttribute(){
+
+        $id = $this->id;
+
+        $fileValoration = DB::table('valorations')
+            ->join('files', 'valorations.file_id', '=', 'files.id')
+            ->join('users', 'files.user_id', '=', 'users.id')
+            ->where('users.id', $id)->get();
+
+        $likesum = $fileValoration->sum('like');
+
+        $dislikesum = $fileValoration->count() - $likesum;
+
+        $dislikeratio = $dislikesum * 0.2;
+
+        $charisma = $likesum - $dislikeratio;
+
+        return $charisma;
+
     }
 
 

@@ -30,7 +30,7 @@
                                 </tr>
                                 <tr>
                                     <td>Puntos de carisma: </td>
-                                    <td>{{ $carisma }}</td>
+                                    <td>{{ $user->charisma }}</td>
                                 </tr>
                                 <tr>
                                     <td>Comentarios: </td>

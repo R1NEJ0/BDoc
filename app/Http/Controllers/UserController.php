@@ -26,15 +26,13 @@ class UserController extends Controller
 
         $id = Auth::user()->id;
 
-        $carisma = $this->calculoCarisma($id);
-
         $user = User::findOrFail($id);
 
         $tiempo = $this->calculoDias($id);
 
         $files = $this->files($id);
 
-        return view('home', compact('user', 'tiempo', 'files', 'carisma', 'mensajes'));
+        return view('home', compact('user', 'tiempo', 'files', 'mensajes'));
     }
 
     public function getUserIndex($id)
@@ -91,28 +89,6 @@ class UserController extends Controller
 
 
     }
-
-    protected function calculoCarisma($id)
-    {
-
-
-        $fileValoration = DB::table('valorations')
-            ->join('files', 'valorations.file_id', '=', 'files.id')
-            ->join('users', 'files.user_id', '=', 'users.id')
-            ->where('users.id', $id)->get();
-
-        $likesum = $fileValoration->sum('like');
-
-        $dislikesum = $fileValoration->count() - $likesum;
-
-        $dislikeratio = $dislikesum * 0.2;
-
-        $charisma = $likesum - $dislikeratio;
-
-        return $charisma;
-
-    }
-
 
     protected function cantidadMensajes($id)
     {
