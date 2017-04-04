@@ -18,7 +18,7 @@
                                 <tbody>
                                 <tr>
                                     <td>Último fichero:</td>
-                                    <td> {{ $ultimofichero }}</td>
+                                    <td> {{ $user->last }}</td>
                                 </tr>
                                 <tr>
                                     <td>Días restantes para el ban:</td>
@@ -34,7 +34,7 @@
                                 </tr>
                                 <tr>
                                     <td>Comentarios: </td>
-                                    <td> {{ $mensajes }}</td>
+                                    <td> {{ $user->comments->count() }}</td>
                                 </tr>
                                 <tr>
                                     <td>Número de ficheros subidos:</td>
@@ -46,9 +46,6 @@
 
                         </div>
                     </div>
-
-
-
 
                 </div>
 

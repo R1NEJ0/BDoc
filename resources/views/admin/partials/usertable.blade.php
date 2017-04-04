@@ -19,7 +19,7 @@
             <td>{{ $user->username }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->role }}</td>
-            <td> Última subida </td>
+            <td> {{ $user->last }} </td>
             <td> Carisma </td>
             <td><a href="{{ route('admin.user.profile', $user->id) }}" class="btn btn-success">Ver</a></td>
             <td><a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-primary">Editar</a></td>

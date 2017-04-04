@@ -18,17 +18,28 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
-
-    public function userIndex($id)
+    public function Index()
     {
 
+        $id = Auth::user()->id;
 
+        $carisma = $this->calculoCarisma($id);
 
-       // $cantidadFicheros = $this->cantidadFicheros($id);
+        $user = User::findOrFail($id);
 
-        $mensajes = $this->cantidadMensajes($id);
+        $tiempo = $this->calculoDias($id);
+
+        $files = $this->files($id);
+
+        return view('home', compact('user', 'tiempo', 'files',
+                                    'carisma', 'mensajes'));
+    }
+
+    public function getUserIndex($id)
+    {
 
         $ultimofichero = $this->ultimoFichero($id);
 
@@ -82,46 +93,27 @@ class UserController extends Controller
 
     }
 
-
     protected function calculoCarisma($id)
     {
+
 
         $fileValoration = DB::table('valorations')
             ->join('files', 'valorations.file_id', '=', 'files.id')
             ->join('users', 'files.user_id', '=', 'users.id')
             ->where('users.id', $id)->get();
 
-        // Editar y poner en constructor, mejor ya que vamos a usar esto varias veces.
-
         $likesum = $fileValoration->sum('like');
 
         $dislikesum = $fileValoration->count() - $likesum;
 
-        $dislikeratio = $dislikesum * 0.1;
+        $dislikeratio = $dislikesum * 0.2;
 
-        $charisma = $likesum/10 - $dislikeratio;
+        $charisma = $likesum - $dislikeratio;
 
         return $charisma;
 
-
     }
 
-    protected function ultimoFichero($id)
-    {
-        $ultimoFichero = User::find($id)->files->sortByDesc('created_at')->first();
-
-        if (is_null($ultimoFichero)){
-
-            $ultimoFichero = [
-                'name' => 'El usuario aún no ha subido ningún fichero'
-            ];
-
-            return $ultimoFichero['name'];
-        }else{
-            return $ultimoFichero['name'];
-
-        }
-    }
 
     protected function cantidadMensajes($id)
     {

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -43,8 +44,23 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment');
     }
 
+    public function getLastAttribute()
+    {
+        $lastFile = $this->files()->orderBy('created_at', 'desc')->first();
 
+        if (is_null($lastFile)) {
 
+            $lastFile = [
+                'created_at' => 'Sin fichero aún'
+            ];
 
+            return $lastFile['created_at'];
+        } else {
+
+            $createdAt = Carbon::parse($lastFile['created_at']);
+
+            return $createdAt->format('d M Y');
+        }
+    }
 
 }

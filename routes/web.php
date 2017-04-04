@@ -26,12 +26,8 @@ Route::get('/home', [
 */
 
 Route::get('/home', function (){
-    return redirect('/profile');
+    return redirect('/index');
 })->name('home');
-
-
-Route::get('/profile/{user?}', 'UserController@profile')->name('profile');
-
 
 Route::get('/upload', 'FileController@upload');
 Route::post('/upload', 'FileController@uploadFile');
@@ -48,7 +44,7 @@ Route::group(['middleware' => 'isAdmin:admin'], function (){
 
     Route::get('/admin/user/edit/{user}', 'AdminController@edit')->name('admin.user.edit');
 
-    Route::get('/admin/user/profile/{user}', 'AdminController@profile')->name('admin.user.profile');
+    Route::get('/admin/user/profile/{user}', 'UserController@getUserIndex')->name('admin.user.profile');
 
     Route::get('/admin/user/destroy/{user}', 'AdminController@destroy')->name('admin.user.destroy');
 });
@@ -65,7 +61,9 @@ Route::get('/comment', function (){
     return view('comment');
 });
 
-Route::get('/pruebas/{user?}', 'UserController@userIndex');
+Route::get('/index', 'UserController@Index');
+
+Route::get('/profile/{user}', 'UserController@getUserIndex');
 
 
 
