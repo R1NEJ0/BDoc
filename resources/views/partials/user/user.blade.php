@@ -18,7 +18,7 @@
                                 <tbody>
                                 <tr>
                                     <td>Último fichero:</td>
-                                    <td> {{ $user->last }}</td>
+                                    <td> {{ $user->last_file_name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Días restantes para el ban:</td>
@@ -26,7 +26,7 @@
                                 </tr>
                                 <tr>
                                     <td>Fecha de registro:</td>
-                                    <td>{{ $user->created_at }}</td>
+                                    <td>{{ $user->created_date }}</td>
                                 </tr>
                                 <tr>
                                     <td>Puntos de carisma: </td>

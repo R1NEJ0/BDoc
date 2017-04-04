@@ -63,4 +63,30 @@ class User extends Authenticatable
         }
     }
 
+    public function getLastFileNameAttribute()
+    {
+        $lastFileName = $this->files()->orderBy('created_at', 'desc')->first();
+
+        if (is_null($lastFileName)){
+
+            $lastFileName = [
+                'name' => 'El usuario aún no ha subido ningún fichero'
+            ];
+
+            return $lastFileName['name'];
+        }else{
+            return $lastFileName['name'];
+
+        }
+    }
+
+    public function getCreatedDateAttribute(){
+
+        $userCreated = Carbon::parse($this->created_at);
+
+        return $userCreated->format('d M Y');
+    }
+
+
+
 }
