@@ -34,14 +34,13 @@ class UserController extends Controller
 
         $files = $this->files($id);
 
-        return view('home', compact('user', 'tiempo', 'files',
-                                    'carisma', 'mensajes'));
+        return view('home', compact('user', 'tiempo', 'files', 'carisma', 'mensajes'));
     }
 
     public function getUserIndex($id)
     {
 
-        $ultimofichero = $this->ultimoFichero($id);
+        //$ultimofichero = $this->ultimoFichero($id);
 
         $carisma = $this->calculoCarisma($id);
 
@@ -52,7 +51,7 @@ class UserController extends Controller
         $files = $this->files($id);
 
         return view('home', compact('user', 'tiempo', 'files', 'carisma',
-                                    'ultimofichero', 'mensajes'));
+                                     'mensajes'));
     }
 
     protected function calculoDias($id)
