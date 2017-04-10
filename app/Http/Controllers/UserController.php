@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\File;
 use App\Valoration;
 use DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database;
 
 class UserController extends Controller
 {
@@ -23,6 +25,7 @@ class UserController extends Controller
 
     public function Index()
     {
+
 
         $id = Auth::user()->id;
 
@@ -40,7 +43,7 @@ class UserController extends Controller
 
         //$ultimofichero = $this->ultimoFichero($id);
 
-        $carisma = $this->calculoCarisma($id);
+
 
         $user = User::findOrFail($id);
 
@@ -48,7 +51,7 @@ class UserController extends Controller
 
         $files = $this->files($id);
 
-        return view('home', compact('user', 'tiempo', 'files', 'carisma',
+        return view('home', compact('user', 'tiempo', 'files',
                                      'mensajes'));
     }
 
@@ -122,6 +125,8 @@ class UserController extends Controller
         return $files;
 
     }
+
+
 
 
 

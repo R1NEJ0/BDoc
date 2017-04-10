@@ -1,3 +1,5 @@
+
+
 <table class="table table-striped">
     <tr>
         <th><a href="/index">#</a></th>
@@ -21,6 +23,7 @@
             <td>{{ $user->role }}</td>
             <td> {{ $user->last }} </td>
             <td> {{ $user->charisma }} </td>
+
             <td><a href="{{ route('admin.user.profile', $user->id) }}" class="btn btn-success">Ver</a></td>
             <td><a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-primary">Editar</a></td>
             <td><a href="{{ route('admin.user.destroy', $user->id) }}" class="btn btn-danger">Eliminar</a></td>

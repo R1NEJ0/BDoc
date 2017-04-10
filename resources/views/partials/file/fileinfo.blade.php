@@ -3,8 +3,12 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default ">
                 <div class="panel-heading clearfix">
-                    Nombre fichero
-                    <div class="pull-right"><a href="/editf">Editar</a></div>
+                    {{ $file->name }}
+                    <div class="pull-right">
+                        @if(Auth::user()->id === $file->user_id)
+                        <a href="/editf">Editar</a>
+                            @endif
+                    </div>
                 </div>
                 <div class="panel-body">
 
@@ -12,39 +16,48 @@
                         <div class="col-md-3 col-lg-3 " align="center">
                             <img alt="avatar" src="http://imagecache5d.allposters.com/watermarker/15-1555-PN9DD00Z.jpg?ch=948&cw=633" class="img-rounded img-responsive">
                             <br><br>
-                            <a href="#" class="btn btn-primary btn-sm">Descargar</a>
-                            <a href="#" class="btn btn-success btn-sm">Like</a>
-                            <a href="#" class="btn btn-danger btn-sm">Dislike</a>
+                            <a href="#" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>
+                            <a href="#" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
+                            <a href="#" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
+                            <a href="#" class="btn btn-warning btn-sm">  <span class="glyphicon glyphicon-comment" ></span></a>
                             <br>
                         </div>
 
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-striped">
                                 <tbody>
-                                @foreach($files as $file)
+
                                 <tr>
                                     <td>Tamaño:</td>
-                                    <td>{{ $file->size }}</td>
+                                    <td>{{ $file->size }} MB</td>
                                 </tr>
                                 <tr>
                                     <td>Extensión: </td>
-                                    <td>{{ $file->fileExtension }}}</td>
+                                    <td> {{ $file->fileExtension }}</td>
                                 </tr>
                                 <tr>
                                     <td>Fecha de subida:</td>
-                                    <td>{{ $file->created_at }} -     Hace XXX días</td>
+                                    <td> {{ $file->day_uploaded }} </td>
                                 </tr>
                                 <tr>
                                     <td>Likes: </td>
-                                    <td>XXX</td>
+                                    <td> {{ $sumaLikes }}</td>
                                 </tr>
                                 <tr>
                                     <td>Dislikes:</td>
-                                    <td>XXX</td>
+                                    <td>{{ $sumaDislikes }}</td>
                                 </tr>
                                 <tr>
                                     <td>Uploader:</td>
-                                    <td>{{ $file->user_id }}</td>
+
+                                @if($usuario)
+                                    <td>El usuario ya no existe</td>
+                                @else
+                                    <td><a href="/profile/{{ $file->user->id }}">
+                                        {{ $file->user->username }}
+                                        </a></td>
+                                 @endif
+
                                 </tr>
                                 <tr>
                                     <td>
@@ -55,10 +68,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Descripción</td>
+                                    <td>Descripción:</td>
                                     <td>{{ $file->description }}</td>
                                 </tr>
-                                @endforeach
+
 
                                 </tbody>
                             </table>

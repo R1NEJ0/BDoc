@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -75,6 +77,15 @@ class AdminController extends Controller
         $user = User::find($id);
 
         return view('admin.partials.useredit')->with('user', $user);
+
+    }
+
+    public function destroy($id){
+
+        $user = User::findOrFail($id);
+        $user->delete();
+        Session::flash('message', 'El usuario ha sido eliminado');
+        return Redirect::back();
 
     }
 

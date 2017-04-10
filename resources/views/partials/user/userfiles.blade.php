@@ -1,7 +1,22 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
+
+
+        @if(Session::has('message'))
+
+            <p class="alert alert-success">{{ Session::get('message') }}</p>
+
+        @endif
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
+
                 <h4 class="pull-left">Ficheros subidos por {{ $user->username }} </h4>
                 <h5 class="pull-right">
                     Buscar:
@@ -38,7 +53,7 @@
                     @foreach($files as $file)
                         <tr>
                     <td>
-                        <a href="/file">{{ $file->name  }}</a>
+                        <a href="{{ route('file.info', $file->id) }}">{{ $file->name  }}</a>
                     </td>
                     <td>
                         {{ $file->fileExtension }}
@@ -55,9 +70,13 @@
                     <td>
                         {{ $file->comments->count() }}
                     </td>
+
                     <td>
+                        @if(Auth::user()->id === $file->user_id || Auth::user()->role === 'admin')
                         <a href="/editf" class="btn btn-primary">Editar</a>
-                        <a href="#" class="btn btn-danger">Borrar</a>
+                        <a href="/file/delete/{{ $file->id }}" class="btn btn-danger">Borrar</a>
+                        @endif
+
                         <a href="#" class="btn btn-success">Descargar</a>
                     </td>
                         </tr>

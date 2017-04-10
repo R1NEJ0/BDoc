@@ -1,40 +1,32 @@
+@foreach($comentarios as $comentario)
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
-                <div class="pull-left">Comentario de Usuario, 22/03/13, editado 23/04/14</div>
+                <div class="pull-left">Comentario de {{ $comentario->username }}, {{ $comentario->created_at }}.
+                    @if($comentario->updated_at === null)
+                </div>
+                        @else
+                    Editado {{ $comentario->updated_at }}</div>
+                    @endif
                 <div class="pull-right">
+                    @if(Auth::user()->id === $file->user_id || Auth::user()->role === 'admin')
                     <a href="/comment">Editar</a>
                     <a href="#">Eliminar</a>
+                        @endif
                 </div>
             </div>
             <div class="panel-body">
 
-                Comentario
+                {{ $comentario->comment }}
 
             </div>
         </div>
     </div>
 </div>
 </div>
+    @endforeach
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <div class="pull-left">Comentario de Usuario, 10/01/12</div>
-                <div class="pull-right">
-                    <a href="/editc">Editar</a>
-                    <a href="/deletec">Eliminar</a>
-                </div>
-            </div>
-            <div class="panel-body">
 
-                Comentario
 
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 

@@ -49,9 +49,9 @@ Route::group(['middleware' => 'isAdmin:admin'], function (){
     Route::get('/admin/user/destroy/{user}', 'AdminController@destroy')->name('admin.user.destroy');
 });
 
-Route::get('/file', function (){
-    return view ('file');
-});
+Route::get('/file/{file}', 'FileController@index')->name('file.info');
+
+Route::get('/file/delete/{file}', 'FileController@destroy');
 
 Route::get('/editf', function (){
     return view('editf');

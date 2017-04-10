@@ -16,4 +16,17 @@ class Comment extends Model
     {
         return $this->belongsTo('App\File');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+
+    public function getUsernameAttribute()
+    {
+        $nombreUsuario = $this->user->username;
+
+        return $nombreUsuario;
+    }
 }

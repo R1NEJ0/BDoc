@@ -6,7 +6,14 @@ use App\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Storage;
+use App\User;
+use DB;
+use Illuminate\Database;
+
+
 
 
 class FileController extends Controller
@@ -16,6 +23,43 @@ class FileController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index($id){
+
+        $usuario = $this->usuarioEliminado($id);
+
+        $file = File::findOrFail($id);
+
+        $sumaLikes = $this->sumaLikes($id);
+        $sumaDislikes = $this->sumaDislike($id);
+        //$uploader = $this->uploader($id);
+        $comentarios = File::find($id)->comments;
+
+
+       // $file = File::where('id', $id)->first();
+
+        return view('file', compact('file', 'sumaLikes', 'sumaDislikes', 'uploader', 'comentarios', 'usuario'));
+    }
+
+    protected function sumaLikes($id)
+    {
+        $sumaLikes = File::find($id)->valorations->where('like', 1)->count();
+
+        return $sumaLikes;
+    }
+
+    protected function sumaDislike($id)
+    {
+        $sumaDislikes = File::find($id)->valorations->where('like', 0)->count();
+
+        return $sumaDislikes;
+    }
+
+    protected function uploader($id){
+        $uploader = File::find($id)->user->username;
+
+        return $uploader;
     }
 
     public function upload()
@@ -78,8 +122,6 @@ class FileController extends Controller
         $file = $request->file('thumbnail');
 
         //store
-
-
 
         $thumbnail = 'th' . '_' . time() . '.' . $file->guessClientExtension();
 
@@ -146,5 +188,30 @@ class FileController extends Controller
 
     }
 
+    public function destroy($id)
+    {
+
+
+        $file = File::findOrFail($id);
+
+
+        $file->delete();
+        Session::flash('message', 'El fichero ha sido eliminado');
+        return Redirect::back();
+    }
+
+    public function usuarioEliminado($id)
+    {
+        $user = File::find($id)->user;
+
+        if ($user == null){
+            $eliminado = true;
+            return $eliminado;
+        }else{
+            $eliminado = false;
+            return $eliminado;
+        }
+    }
+    
 
 }

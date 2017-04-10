@@ -9,7 +9,9 @@
                         <div class="col-md-3 col-lg-3 " align="center">
                             <img alt="avatar" src="https://pbs.twimg.com/profile_images/418179395786784768/nT1N-1i3.jpeg" class="img-rounded img-responsive">
                             <br>
+                            @if(Auth::user()->id === $user->id || Auth::user()->role === 'admin')
                             <a href="#" class="btn btn-warning">Editar Avatar</a>
+                            @endif
                             <br>
                         </div>
 

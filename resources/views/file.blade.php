@@ -1,6 +1,8 @@
 @extends('layouts.loged')
 
+
 @section('content')
+
 
     @include('partials.file.fileinfo')
 
