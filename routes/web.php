@@ -53,8 +53,13 @@ Route::get('/file/{file}', 'FileController@index')->name('file.info');
 
 Route::get('/file/delete/{file}', 'FileController@destroy');
 
+Route::get('/file/comment/delete={comment}', 'CommentController@destroy');
+Route::get('/file/comment/edit={comment}', 'CommentController@edit');
+Route::get('/file/comment/create', 'CommentController@create');
+Route::get('/file/comment/update/{comment}', 'CommentController@update');
+
 Route::get('/editf', function (){
-    return view('editf');
+    return view('partials.file.edit');
 });
 
 Route::get('/comment', function (){

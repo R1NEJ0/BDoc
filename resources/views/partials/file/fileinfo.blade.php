@@ -5,7 +5,7 @@
                 <div class="panel-heading clearfix">
                     {{ $file->name }}
                     <div class="pull-right">
-                        @if(Auth::user()->id === $file->user_id)
+                        @if(Auth::user()->id === $file->user_id || Auth::user()->role === 'admin')
                         <a href="/editf">Editar</a>
                             @endif
                     </div>

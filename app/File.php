@@ -43,16 +43,4 @@ class File extends Model
         return $dayuploaded->format('d M Y');
     }
 
-   // public function getUploaderAttribute(){
-/*
-        $id = $this->id;
-
-        $uploader = DB::table('users')
-            ->join('files', 'valorations.file_id', 'files.id')
-            ->join('users', 'files.user_id', '=', 'users.id')
-            ->where('users.id',->get();
-
-    }
-*/
-
 }

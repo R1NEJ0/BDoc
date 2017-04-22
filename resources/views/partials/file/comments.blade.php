@@ -1,3 +1,10 @@
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @if(Session::has('message'))
+            <p class="alert alert-success">{{ Session::get('message') }}</p>
+        @endif
+    </div>
+</div>
 @foreach($comentarios as $comentario)
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -11,8 +18,8 @@
                     @endif
                 <div class="pull-right">
                     @if(Auth::user()->id === $file->user_id || Auth::user()->role === 'admin')
-                    <a href="/comment">Editar</a>
-                    <a href="#">Eliminar</a>
+                    <a href="/file/comment/edit={{ $comentario->id }}">Editar</a>
+                    <a href="/file/comment/delete={{$comentario->id}}">Eliminar</a>
                         @endif
                 </div>
             </div>
