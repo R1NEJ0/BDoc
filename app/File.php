@@ -43,4 +43,9 @@ class File extends Model
         return $dayuploaded->format('d M Y');
     }
 
+    public function scopeTag($query, $tag){
+
+
+    }
+
 }

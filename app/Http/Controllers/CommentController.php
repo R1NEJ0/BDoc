@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use Request;
+use App\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
@@ -32,9 +34,29 @@ class CommentController extends Controller
         return view('partials.file.editcomment', compact('comment'));
     }
 
-    public function create(){
+    public function create($id){
+
+        $file = File::findOrFail($id);
+        return view('partials.file.newcomment', compact('file'));
 
     }
+
+    public function store(Request $request, File $file){
+
+
+        $comment = new Comment([
+            'user_id'=> Auth::id(),
+            'comment'=> $request->get('comment'),
+            'file_id'=> $file->id,
+        ]);
+
+
+        $comment->save();
+
+        return redirect()->route('file.info', ['id' => $comment->file_id])->with('message', 'El comentario ha sido añadido');
+    }
+
+
 
     public function update($id){
 

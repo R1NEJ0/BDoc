@@ -73,7 +73,7 @@
 
                     <td>
                         @if(Auth::user()->id === $file->user_id || Auth::user()->role === 'admin')
-                        <a href="/editf" class="btn btn-primary">Editar</a>
+                        <a href="/file/edit/{{ $file->id }}" class="btn btn-primary">Editar</a>
                         <a href="/file/delete/{{ $file->id }}" class="btn btn-danger">Borrar</a>
                         @endif
 

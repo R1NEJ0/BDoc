@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\File;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Storage;
-use App\User;
 use DB;
-use Illuminate\Database;
+
 
 
 
@@ -196,9 +194,10 @@ class FileController extends Controller
 
 
         $file->delete();
-        Session::flash('message', 'El fichero ha sido eliminado');
-        return Redirect::back();
+
+        return redirect()->route('home')->with('message', 'El fichero ha sido eliminado');
     }
+
 
     public function usuarioEliminado($id)
     {
@@ -212,6 +211,25 @@ class FileController extends Controller
             return $eliminado;
         }
     }
+
+    public function edit($id){
+
+        $file = File::findOrFail($id);
+        return view('partials.file.edit', compact('file'));
+
+    }
+
+    public function update($id){
+
+        $file = File::findOrFail($id);
+        $file->fill(Request::all());
+        $file->save();
+        Session::flash('message', 'Los datos del fichero se han editado correctamente');
+        return redirect()->route('file.info', ['id' => $file->id]);
+
+    }
+
+
     
 
 }

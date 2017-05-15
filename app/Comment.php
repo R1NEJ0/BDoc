@@ -9,7 +9,7 @@ class Comment extends Model
     //
 
     protected $fillable = [
-      'comment',
+      'user_id', 'comment', 'file_id',
     ];
 
     public function file()

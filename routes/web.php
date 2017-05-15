@@ -55,12 +55,15 @@ Route::get('/file/delete/{file}', 'FileController@destroy');
 
 Route::get('/file/comment/delete={comment}', 'CommentController@destroy');
 Route::get('/file/comment/edit={comment}', 'CommentController@edit');
-Route::get('/file/comment/create', 'CommentController@create');
+Route::get('/file/comment/create={file}', 'CommentController@create');
+Route::post('/file/comment/store={file}', 'CommentController@store');
+
 Route::get('/file/comment/update/{comment}', 'CommentController@update');
 
-Route::get('/editf', function (){
-    return view('partials.file.edit');
-});
+Route::get('/file/edit/{file}', 'FileController@edit');
+Route::get('/file/update/{file}', 'FileController@update');
+
+
 
 Route::get('/comment', function (){
     return view('comment');

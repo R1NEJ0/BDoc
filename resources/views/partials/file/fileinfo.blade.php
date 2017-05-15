@@ -6,7 +6,7 @@
                     {{ $file->name }}
                     <div class="pull-right">
                         @if(Auth::user()->id === $file->user_id || Auth::user()->role === 'admin')
-                        <a href="/editf">Editar</a>
+                        <a href="/file/edit/{{ $file->id }}">Editar</a>
                             @endif
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                             <a href="#" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>
                             <a href="#" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
                             <a href="#" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
-                            <a href="#" class="btn btn-warning btn-sm">  <span class="glyphicon glyphicon-comment" ></span></a>
+                            <a href="/file/comment/create={{ $file->id }}" class="btn btn-warning btn-sm">  <span class="glyphicon glyphicon-comment" ></span></a>
                             <br>
                         </div>
 
