@@ -14,11 +14,11 @@
 
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center">
-                            <img alt="avatar" src="http://imagecache5d.allposters.com/watermarker/15-1555-PN9DD00Z.jpg?ch=948&cw=633" class="img-rounded img-responsive">
+                            <img alt="avatar" src="/storage/{{ $file->thumbnailURL }}" class="img-rounded img-responsive">
                             <br><br>
-                            <a href="#" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>
-                            <a href="#" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
-                            <a href="#" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
+                            <a href="/storage/{{ $file->url }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>
+                            <a href="/file/like/{{ $file->id }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
+                            <a href="/file/dislike/{{ $file->id }}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
                             <a href="/file/comment/create={{ $file->id }}" class="btn btn-warning btn-sm">  <span class="glyphicon glyphicon-comment" ></span></a>
                             <br>
                         </div>

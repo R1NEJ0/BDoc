@@ -80,7 +80,9 @@ class UserController extends Controller
 
         $difference = 28 - $lastFileinDays;
 
-        return $difference;
+        // cambio esto para que muestre solamente los días desde que se subió el último fichero
+
+        return $lastFileinDays;
 
     }
 

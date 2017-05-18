@@ -48,6 +48,7 @@ class CommentController extends Controller
             'user_id'=> Auth::id(),
             'comment'=> $request->get('comment'),
             'file_id'=> $file->id,
+            'updated_at' => null,
         ]);
 
 

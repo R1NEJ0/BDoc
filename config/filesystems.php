@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => 'file',
+    'default' => 'public',
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/files'),
+            'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
 

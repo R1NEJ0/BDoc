@@ -17,7 +17,7 @@
                     Editado {{ $comentario->updated_at }}</div>
                     @endif
                 <div class="pull-right">
-                    @if(Auth::user()->id === $file->user_id || Auth::user()->role === 'admin')
+                    @if(Auth::user()->id === $comentario->user_id || Auth::user()->role === 'admin')
                     <a href="/file/comment/edit={{ $comentario->id }}">Editar</a>
                     <a href="/file/comment/delete={{$comentario->id}}">Eliminar</a>
                         @endif

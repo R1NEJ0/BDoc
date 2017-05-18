@@ -32,7 +32,7 @@ Route::get('/home', function (){
 Route::get('/upload', 'FileController@upload');
 Route::post('/upload', 'FileController@uploadFile');
 
-Route::get('/search', 'UserController@search');
+Route::get('/search', 'FileController@search');
 
 Route::get('/config', 'UserController@config');
 
@@ -62,6 +62,8 @@ Route::get('/file/comment/update/{comment}', 'CommentController@update');
 
 Route::get('/file/edit/{file}', 'FileController@edit');
 Route::get('/file/update/{file}', 'FileController@update');
+Route::get('/file/like/{file}', 'ValorationController@like');
+Route::get('/file/dislike/{file}', 'ValorationController@dislike');
 
 
 

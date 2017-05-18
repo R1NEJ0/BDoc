@@ -9,7 +9,7 @@ class Valoration extends Model
     //
 
     protected $fillable=[
-        'like',
+        'like', 'user_id', 'file_id',
     ];
 
     public function file()

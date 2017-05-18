@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\File;
-use Request;
+use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -22,6 +22,8 @@ class FileController extends Controller
     {
         $this->middleware('auth');
     }
+
+
 
     public function index($id){
 
@@ -115,6 +117,12 @@ class FileController extends Controller
         return $IMGPath;
     }
 
+    private function getFilePath(){
+        $FilePath = $this->getUserID() . '/files';
+
+        return $FilePath;
+    }
+
     private function thumbnail($request){
 
         $file = $request->file('thumbnail');
@@ -135,7 +143,7 @@ class FileController extends Controller
         return $file->name;
     }
 
-    public function storeFile($request){
+    public function storeThumbnail($request){
 
         $this->validate($request, [
             'thumbnail' => 'required|image'
@@ -149,7 +157,18 @@ class FileController extends Controller
         //Storage::disk('file')->put($this->thumbnailName(), file_get_contents($img->getRealPath() ) );
 
 
+    }
 
+    public function storeFile($request){
+
+        $this->validate($request, [
+            'file' => 'required'
+        ]);
+
+        $file = $request->file('file')
+            ->store($this->getFilePath());
+
+        return $file;
     }
 
     public function uploadFile(Request $request)
@@ -169,17 +188,21 @@ class FileController extends Controller
 
         $file->keywords = $request->input('keywords');
 
-        $file->url = ' ';
+        $file->url = $this->storeFile($request);
 
         $file->user_id = Auth::user()->id;
 
         $file->thumbnailName = $this->thumbnailName($request);
 
-        $file->thumbnailURL = $this->thumbnailName($request);
+        $file->thumbnailURL = $this->storeThumbnail($request);
 
-        $this->storeFile($request);
 
         $file->save();
+
+        Session::flash('message', 'El fichero se ha subido correctamente');
+        return redirect()->route('home');
+
+
 
         
 
@@ -195,7 +218,7 @@ class FileController extends Controller
 
         $file->delete();
 
-        return redirect()->route('home')->with('message', 'El fichero ha sido eliminado');
+        return redirect()->back()->with('message', 'El fichero ha sido eliminado');
     }
 
 
@@ -226,6 +249,17 @@ class FileController extends Controller
         $file->save();
         Session::flash('message', 'Los datos del fichero se han editado correctamente');
         return redirect()->route('file.info', ['id' => $file->id]);
+
+    }
+
+    public function search(Request $request){
+
+
+        $files = File::name($request->get('name'), $request->get('type'))->orderBy('created_at', 'DESC')->paginate();
+
+
+
+        return view('search', compact('files', 'request'));
 
     }
 

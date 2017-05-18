@@ -18,11 +18,6 @@
             <div class="panel-heading clearfix">
 
                 <h4 class="pull-left">Ficheros subidos por {{ $user->username }} </h4>
-                <h5 class="pull-right">
-                    Buscar:
-                    <input type="text">
-                    <input type="submit" class="btn btn-primary btn-xs" value="Dale!">
-                </h5>
             </div>
             <div class="panel-body">
                 <table class="table table-striped table-responsive">
@@ -77,7 +72,7 @@
                         <a href="/file/delete/{{ $file->id }}" class="btn btn-danger">Borrar</a>
                         @endif
 
-                        <a href="#" class="btn btn-success">Descargar</a>
+                        <a href="/storage/{{ $file->url }}" class="btn btn-success">Descargar</a>
                     </td>
                         </tr>
                         @endforeach

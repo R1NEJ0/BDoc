@@ -18,7 +18,7 @@
                                     <td> {{ $user->last_file_name }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Días restantes para el ban:</td>
+                                    <td>Último fichero subido:</td>
                                     <td>{{$tiempo}} días</td>
                                 </tr>
                                 <tr>
