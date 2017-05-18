@@ -34,24 +34,28 @@ Route::post('/upload', 'FileController@uploadFile');
 
 Route::get('/search', 'FileController@search');
 
-Route::get('/config', 'UserController@config');
+Route::get('/config', 'UserController@config')->name('config');
+Route::get('/config/destroy', 'UserController@destroy');
+Route::post('/config/update', 'UserController@update');
 
 Route::get('/edit', 'UserController@edit');
 
 Route::group(['middleware' => 'isAdmin:admin'], function (){
 
-    Route::get('/admin/panel', 'AdminController@index');
+    Route::get('/admin/panel', 'AdminController@index')->name('admin.panel');
 
     Route::get('/admin/user/edit/{user}', 'AdminController@edit')->name('admin.user.edit');
 
     Route::get('/admin/user/profile/{user}', 'UserController@getUserIndex')->name('admin.user.profile');
 
     Route::get('/admin/user/destroy/{user}', 'AdminController@destroy')->name('admin.user.destroy');
+
+    Route::post('/admin/user/edit/{user}/update', 'AdminController@update');
 });
 
 Route::get('/file/{file}', 'FileController@index')->name('file.info');
 
-Route::get('/file/delete/{file}', 'FileController@destroy');
+Route::get('/file/delete/{file}', 'FileController@destroy')->name('user.destroy.file');
 
 Route::get('/file/comment/delete={comment}', 'CommentController@destroy');
 Route::get('/file/comment/edit={comment}', 'CommentController@edit');

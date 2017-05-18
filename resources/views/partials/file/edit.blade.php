@@ -46,11 +46,10 @@
                                         Guardar
                                     </button>
                                     <a href="/file/delete/{{ $file->id }}" class="btn btn-danger">Eliminar</a>
-                                    <a href="/file/{{ $file->id }}" class="btn btn-success">Ir a la página del fichero</a>
+                                    <a href="{{ route('user.destroy.file', $file->id) }}" class="btn btn-success">Ir a la página del fichero</a>
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

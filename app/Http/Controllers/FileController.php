@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\File;
-use Illuminate\Http\Request as Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -218,7 +218,7 @@ class FileController extends Controller
 
         $file->delete();
 
-        return redirect()->back()->with('message', 'El fichero ha sido eliminado');
+        return redirect()->route('home')->with('message', 'El fichero ha sido eliminado');
     }
 
 
@@ -254,10 +254,9 @@ class FileController extends Controller
 
     public function search(Request $request){
 
+       $files = File::name($request->get('name'), $request->get('type'))->orderBy('created_at', 'DESC')->paginate();
 
-        $files = File::name($request->get('name'), $request->get('type'))->orderBy('created_at', 'DESC')->paginate();
-
-
+      // dd($files);
 
         return view('search', compact('files', 'request'));
 

@@ -18,8 +18,6 @@
                                 </div>
                                 <div class="col-md-2">
                                     <select name="type" id="type">
-
-
                                         <option value="name" selected>Nombre</option>
                                         <option value="description">Descripción</option>
                                         <option value="tag">Etiqueta</option>
@@ -49,7 +47,7 @@
                         <th>Nombre</th>
                         <th>Extensión</th>
                         <th>Tamaño</th>
-                        <th>Uploader</th>
+
                         <th>Likes</th>
                         <th>Dislikes</th>
                         <th>Acción</th>
@@ -64,7 +62,7 @@
                             <td>{{ $file->name }}</td>
                             <td>{{ $file->fileExtension }}</td>
                             <td>{{ $file->size }}</td>
-                            <td>{{ $file->user->username }} </td>
+
                             <td>{{ $file->likes }} </td>
                             <td> {{ $file->dislikes }} </td>
 

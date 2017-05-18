@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
         $admin->email = 'mail@mail.com';
         $admin->password = bcrypt('123456');
         $admin->role = 'admin';
+        $admin->urlAvatar = 'avatarIMG';
         $admin->save();
 
         $user = new User;
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
         $user->email = 'user@mail.com';
         $user->password = bcrypt('123456');
         $user->role = 'user';
+        $user->urlAvatar = 'avatarIMG';
         $user->save();
 
         //
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
                 'email' => $faker->email,
                 'password' => bcrypt('123456'),
                 'role' => 'user',
+                'urlAvatar' => '',
 
             ));
         }

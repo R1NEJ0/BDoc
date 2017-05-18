@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
-use Illuminate\Http\Request;
+
 
 class File extends Model
 {
@@ -62,8 +62,8 @@ class File extends Model
 
     public function scopeName($query, $name, $type){
 
-        switch ($type){
 
+        switch ($type){
             case "name":
                 $query->where('name', "LIKE", '%'.$name.'%');
                 break;

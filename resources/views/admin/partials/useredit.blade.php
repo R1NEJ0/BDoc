@@ -8,7 +8,7 @@
                 <div class="panel-heading">Editar usuario {{ $user->username }}</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('#') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="/admin/user/edit/{{ $user->id }}/update">
                         {{ csrf_field() }}
 
 
@@ -20,7 +20,8 @@
 
                             <div class="col-md-6">
                                 <select name="role" id="role" class="form-control">
-                                    <option value="{{ $user->role }}">Selecciona...</option>
+                                    <option value="{{ $user->role }}">{{ $user->role }}</option>
+                                    <option disabled="disabled">----------------</option>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>
@@ -45,7 +46,7 @@
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -59,16 +60,16 @@
                             <label for="password-confirm" class="col-md-4 control-label">Repita la contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-success">
-                                    Guardar
+                                    Actualizar
                                 </button>
-                                <button type="submit" class="btn btn-danger">Eliminar cuenta</button>
+                                <a href="{{ route('admin.user.destroy', $user->id) }}" class="btn btn-danger">Eliminar cuenta</a>
                             </div>
                         </div>
                     </form>

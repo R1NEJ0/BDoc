@@ -5,17 +5,11 @@
                 <div class="panel-heading">Panel de configuración de {{ Auth::user()->username }}</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('#') }}">
+                    <form class="form-horizontal" role="form" method="post" action="/config/update" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-3">
-
-
-                                    <img alt="avatar" src="https://pbs.twimg.com/profile_images/418179395786784768/nT1N-1i3.jpeg" class="img-rounded img-responsive">
-
-
-
-
+                                    <img alt="avatar" src="/storage/{{ $user->urlAvatar }}" class="img-rounded img-responsive">
                             </div>
                         </div>
 
@@ -25,7 +19,7 @@
                             <label for="avatar" class="col-md-4 control-label">Avatar</label>
 
                             <div class="col-md-6">
-                                <input type="file" class="form-control" name="avatar">
+                                <input type="file" class="form-control" name="avatar" id="avatar">
                             </div>
                         </div>
 
@@ -33,7 +27,7 @@
                             <label for="email" class="col-md-4 control-label">Email</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -47,7 +41,7 @@
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" >
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -61,16 +55,17 @@
                             <label for="password-confirm" class="col-md-4 control-label">Repita la contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Registrarse
+                                    Actualizar
                                 </button>
-                                <button type="submit" class="btn btn-danger">Eliminar cuenta</button>
+                                <a href="/config/destroy" class="btn btn-danger">Eliminar cuneta</a>
+
                             </div>
                         </div>
                     </form>

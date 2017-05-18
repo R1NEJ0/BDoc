@@ -16,9 +16,10 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index(){
         $users = User::paginate(10);
+
+
 
         return view('admin.dashboard', compact(
             'users'
@@ -48,7 +49,6 @@ class AdminController extends Controller
 
 
     }
-
 
     public function sortByUsername(){
         $users = User::orderBy('username')->paginate(10);
@@ -85,7 +85,80 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         Session::flash('message', 'El usuario ha sido eliminado');
-        return Redirect::back();
+        return redirect()->route('admin.panel')->with('message', 'El Usuario ha sido eliminado');
+
+    }
+
+    public function getUserID($id){
+
+        $user = User::findOrFail($id);
+        return $user;
+
+    }
+
+    private function updateEmail($request, $id){
+
+        if ($request->email != null){
+
+            $this->validate($request,[
+                'email' => 'email',
+            ]);
+
+            $email = $request->email;
+            return $email;
+        }else{
+
+            $email = User::find($this->getUserID($id))->email;
+            return $email;
+        }
+
+    }
+
+    private function updateRol($request, $id){
+
+        if ($request->role != null){
+            $rol = $request->role;
+            return $rol;
+        }else{
+            $rol = User::find($this->getUserID($id))->role;
+            return $rol;
+
+        }
+    }
+
+    private function updatePass($request, $id){
+
+         if ($request->password != null && $request->password == $request->password_confirmation){
+            $this->validate($request, [
+                'password' => 'min:6'
+            ]);
+            $newPass = bcrypt($request->password);
+            return $newPass;
+        }else{
+            $oldPass = $id->password;
+
+            return $oldPass;
+        }
+
+    }
+
+    public function update(Request $request, $id){
+
+        $usuario = $this->getUserID($id);
+
+        $usuario->email     =   $this->updateEmail($request,$usuario );
+        $usuario->role         =   $this->updateRol($request, $usuario);
+        $usuario->password     =   $this->updatePass($request, $usuario);
+
+        $usuario->save();
+        return redirect()->route('admin.panel')->with('message', 'Usuario actualizado');
+
+
+
+
+
+
+
 
     }
 

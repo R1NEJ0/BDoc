@@ -7,7 +7,7 @@
 
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center">
-                            <img alt="avatar" src="https://pbs.twimg.com/profile_images/418179395786784768/nT1N-1i3.jpeg" class="img-rounded img-responsive">
+                            <img alt="avatar" src="/storage/{{ $user->urlAvatar }}" class="img-rounded img-responsive">
                         </div>
 
                         <div class=" col-md-9 col-lg-9 ">
