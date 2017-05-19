@@ -17,6 +17,8 @@ class ValorationController extends Controller
         $this->middleware('auth');
     }
 
+    // añade like
+
     public function like(File $file){
 
         $valoracion = new Valoration([
@@ -30,6 +32,8 @@ class ValorationController extends Controller
         return redirect()->back()->with('message', 'El Like ha sido añadido');
 
     }
+
+    // añade dislike
 
     public function dislike(File $file){
 

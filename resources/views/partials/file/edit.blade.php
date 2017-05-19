@@ -8,7 +8,7 @@
                     <div class="panel-heading">Editar fichero {{ $file->name }}</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="PUT" action="/file/update/{{ $file->id }}">
+                        <form class="form-horizontal" role="form" method="POST" action="/file/update/{{ $file->id }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="form-group">

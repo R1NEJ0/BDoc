@@ -42,6 +42,8 @@ class UserController extends Controller
         return view('home', compact('user', 'tiempo', 'files', 'mensajes'));
     }
 
+    // devuelve la vista de inicio por cada usuario
+
     public function getUserIndex($id)
     {
 
@@ -58,6 +60,8 @@ class UserController extends Controller
         return view('home', compact('user', 'tiempo', 'files',
                                      'mensajes'));
     }
+
+    // calcula los días desde el último fichero
 
     protected function calculoDias($id)
     {
@@ -90,6 +94,8 @@ class UserController extends Controller
 
     }
 
+    // devuelve la vista de edición de usuario
+
     public function edit($id){
         $user = User::findOrFail(Auth::user()->id);
 
@@ -99,12 +105,16 @@ class UserController extends Controller
 
     }
 
+    // devuelve la cantidad de mensajes escritos por usuario
+
     protected function cantidadMensajes($id)
     {
         $mensajes = User::find($id)->comments->count();
 
         return $mensajes;
     }
+
+    // devuelve la cantidad de ficheros subidos por usuario
 
     protected function cantidadFicheros($id)
     {
@@ -114,9 +124,13 @@ class UserController extends Controller
 
     }
 
+    // devuelve la vista de búsqueda
+
     public function search(){
         return view('search');
     }
+
+    // devuelve la vista de configuración
 
     public function config(){
 
@@ -127,6 +141,8 @@ class UserController extends Controller
 
     }
 
+    // devuelve los ficheros de usuario
+
     public function files($id){
 
         $files = File::all()->where('user_id', $id);
@@ -134,6 +150,8 @@ class UserController extends Controller
         return $files;
 
     }
+
+    // borra usuario
 
     public function destroy(){
 
@@ -144,6 +162,7 @@ class UserController extends Controller
         return Redirect::back();
     }
 
+    // obtiene el current user
 
     private function getUserID()
     {
@@ -152,11 +171,15 @@ class UserController extends Controller
         return $user;
     }
 
+    // obtiene el donde guardará el avatar
+
     private function getAvatarPath(){
         $IMGPath = $this->getUserID() . '/avatar';
 
         return $IMGPath;
     }
+
+    // obtiene la extensión del avatar
 
     private function extensionFile($request){
 
@@ -166,6 +189,8 @@ class UserController extends Controller
 
         return $extension;
     }
+
+    // actualiza el avatar
 
     private function updateAvatar($request){
 
@@ -188,6 +213,8 @@ class UserController extends Controller
 
     }
 
+    // valida actualización de email
+
     private function updateEmail($request){
 
         if ($request->email != null){
@@ -206,6 +233,8 @@ class UserController extends Controller
 
     }
 
+    // valisa password
+
     private function updatePass($request){
 
         if ($request->password == null || $request->password != $request->password_confirmation ){
@@ -220,6 +249,7 @@ class UserController extends Controller
         }
     }
 
+    // actualiza los datos del usuario
 
     public function update(Request $request){
 

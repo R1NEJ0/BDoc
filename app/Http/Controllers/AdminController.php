@@ -27,6 +27,8 @@ class AdminController extends Controller
 
     }
 
+    // calcula el carisma y lo devuelve
+
     protected function calculoCarisma($id)
     {
 
@@ -50,6 +52,8 @@ class AdminController extends Controller
 
     }
 
+    // ordena por usuario
+
     public function sortByUsername(){
         $users = User::orderBy('username')->paginate(10);
         return view('admin.dashboard', [
@@ -57,13 +61,19 @@ class AdminController extends Controller
         ]);
     }
 
+    // ordena por carisma
+
     public function sortByCharisma(){
 
     }
 
+    // ordena por ultima actualizacion
+
     public function sortByLastUpdate(){
 
     }
+
+    // ordena por email
 
     public function sortByEmail(){
         $users = User::orderBy('email')->paginate(10);
@@ -72,6 +82,8 @@ class AdminController extends Controller
         ]);
     }
 
+    // devuelve vista edit
+
     public function edit($id){
 
         $user = User::find($id);
@@ -79,6 +91,8 @@ class AdminController extends Controller
         return view('admin.partials.useredit')->with('user', $user);
 
     }
+
+    // destruye user
 
     public function destroy($id){
 
@@ -89,12 +103,16 @@ class AdminController extends Controller
 
     }
 
+    // obtiene user
+
     public function getUserID($id){
 
         $user = User::findOrFail($id);
         return $user;
 
     }
+
+    // valida campo email
 
     private function updateEmail($request, $id){
 
@@ -114,6 +132,8 @@ class AdminController extends Controller
 
     }
 
+    // valida campo rol
+
     private function updateRol($request, $id){
 
         if ($request->role != null){
@@ -125,6 +145,8 @@ class AdminController extends Controller
 
         }
     }
+
+    // valida campo pass
 
     private function updatePass($request, $id){
 
@@ -141,6 +163,8 @@ class AdminController extends Controller
         }
 
     }
+
+    // actualiza usuario
 
     public function update(Request $request, $id){
 

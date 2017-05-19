@@ -65,7 +65,7 @@ Route::post('/file/comment/store={file}', 'CommentController@store');
 Route::get('/file/comment/update/{comment}', 'CommentController@update');
 
 Route::get('/file/edit/{file}', 'FileController@edit');
-Route::get('/file/update/{file}', 'FileController@update');
+Route::post('/file/update/{file}', 'FileController@update');
 Route::get('/file/like/{file}', 'ValorationController@like');
 Route::get('/file/dislike/{file}', 'ValorationController@dislike');
 

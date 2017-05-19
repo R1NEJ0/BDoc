@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Storage;
 use DB;
+use App\User;
 
 
 
@@ -22,8 +23,7 @@ class FileController extends Controller
     {
         $this->middleware('auth');
     }
-
-
+    
 
     public function index($id){
 
@@ -42,12 +42,16 @@ class FileController extends Controller
         return view('file', compact('file', 'sumaLikes', 'sumaDislikes', 'uploader', 'comentarios', 'usuario'));
     }
 
+    // Suma de likes de todos los ficheros del usuario
+
     protected function sumaLikes($id)
     {
         $sumaLikes = File::find($id)->valorations->where('like', 1)->count();
 
         return $sumaLikes;
     }
+
+    // Suma de dislikes de todos los ficheros del usuario
 
     protected function sumaDislike($id)
     {
@@ -56,16 +60,22 @@ class FileController extends Controller
         return $sumaDislikes;
     }
 
+    // devuelve el uploader
+
     protected function uploader($id){
         $uploader = File::find($id)->user->username;
 
         return $uploader;
     }
 
+    // devuelve la vista de upload
+
     public function upload()
     {
         return view('upload');
     }
+
+    // devuelve el tamaño del fichero
 
     private function sizeFile($request){
 
@@ -76,6 +86,8 @@ class FileController extends Controller
         return $size;
     }
 
+    // devuelve el nombre real del fichero
+
     private function fileName($request){
 
         $file = $request->file('file');
@@ -85,6 +97,8 @@ class FileController extends Controller
         return $fileName;
     }
 
+    // devuelve la extensión real del fichero
+
     private function extensionFile($request){
 
         $file = $request->file('file');
@@ -93,6 +107,8 @@ class FileController extends Controller
 
         return $extension;
     }
+
+    // le da nombre al thumbnail, no se usa solo para la integridad de la bd.
 
     private function thumbnailName($request){
 
@@ -105,11 +121,15 @@ class FileController extends Controller
 
     }
 
+    // devuelve el id del usuario que ha subido x fichero
+
     private function getUserID(){
         $user = Auth::user()->id;
 
         return $user;
     }
+
+    // devuelve la ruta donde se guardará el thumbnail
 
     private function getIMGPath(){
         $IMGPath = $this->getUserID() . '/th';
@@ -117,11 +137,15 @@ class FileController extends Controller
         return $IMGPath;
     }
 
+    // devuelve la ruta donde se guardará el fichero
+
     private function getFilePath(){
         $FilePath = $this->getUserID() . '/files';
 
         return $FilePath;
     }
+
+    // no se usa
 
     private function thumbnail($request){
 
@@ -136,12 +160,16 @@ class FileController extends Controller
         return $thumbnail;
     }
 
+    // no se usa
+
     private function getFileName($request){
 
         $file = $request->file('file');
 
         return $file->name;
     }
+
+    // guarda el thumbnail
 
     public function storeThumbnail($request){
 
@@ -159,6 +187,8 @@ class FileController extends Controller
 
     }
 
+    // guarda el fichero
+
     public function storeFile($request){
 
         $this->validate($request, [
@@ -170,6 +200,8 @@ class FileController extends Controller
 
         return $file;
     }
+
+    // acción del post en la vista upload
 
     public function uploadFile(Request $request)
     {
@@ -209,6 +241,8 @@ class FileController extends Controller
 
     }
 
+    // elimina el fichero
+
     public function destroy($id)
     {
 
@@ -221,6 +255,7 @@ class FileController extends Controller
         return redirect()->route('home')->with('message', 'El fichero ha sido eliminado');
     }
 
+    // devuelve true si el usuario se ha eliminado y false si sigue activo
 
     public function usuarioEliminado($id)
     {
@@ -235,6 +270,8 @@ class FileController extends Controller
         }
     }
 
+    // devuelve la vista para editar fichero
+
     public function edit($id){
 
         $file = File::findOrFail($id);
@@ -242,15 +279,77 @@ class FileController extends Controller
 
     }
 
-    public function update($id){
+    // obtiene el ID del usuario que ha subido el fichero
 
-        $file = File::findOrFail($id);
-        $file->fill(Request::all());
+    public function getUserFileID($fileID){
+
+        $owner = File::find($fileID)->user->id;
+        return $owner;
+
+    }
+
+    // obtiene el path de actualización del thumbnail
+
+    private function getThumbnailPath($fileID){
+
+        $path = $this->getUserFileID($fileID) . '/th';
+
+        return $path;
+    }
+
+    // actualiza el thumbnail del fichero
+
+    private function updateThumb($request, $fileID)
+    {
+
+        if ($request->thumbnail != null) {
+
+            $this->validate($request, [
+                'avatar' => 'image'
+            ]);
+
+            $img = $request->file('thumbnail')->store($this->getThumbnailPath($fileID));
+
+            return $img;
+
+        } else {
+            $oldThumbnail = File::find($fileID)->thumbnailURL;
+            return $oldThumbnail;
+        }
+    }
+
+    // actualiza el fichero -> trabajando
+
+    public function update(Request $request, $id){
+
+
+
+
+
+            $file = File::findOrFail($id);
+
+            $file->thumbnailURL      =   $this->updateThumb($request, $id);
+            $file->name              =   $request->name;
+            $file->keywords          =   $request->keywords;
+            $file->description       =   $request->description;
+
+
+
+
+
+        // thumbnail
+        // nombre
+        // Tags
+        // Descripción
+
+
         $file->save();
         Session::flash('message', 'Los datos del fichero se han editado correctamente');
         return redirect()->route('file.info', ['id' => $file->id]);
 
     }
+
+    // devuelve la vista de búsqueda y manda a scope una búsqueda
 
     public function search(Request $request){
 
@@ -262,7 +361,5 @@ class FileController extends Controller
 
     }
 
-
-    
 
 }

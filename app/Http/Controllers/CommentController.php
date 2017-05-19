@@ -19,6 +19,8 @@ class CommentController extends Controller
         $this->middleware('auth');
     }
 
+    // destruye comentario
+
     public function destroy($id){
 
         $comment = Comment::findOrFail($id);
@@ -28,11 +30,15 @@ class CommentController extends Controller
         return redirect()->route('file.info', ['id' => $comment->file_id]);
     }
 
+    // edita comentario
+
     public function edit($id){
 
         $comment = Comment::find($id);
         return view('partials.file.editcomment', compact('comment'));
     }
+
+    // devuelve vista crear comentario
 
     public function create($id){
 
@@ -40,6 +46,8 @@ class CommentController extends Controller
         return view('partials.file.newcomment', compact('file'));
 
     }
+
+    // guarda el comentario
 
     public function store(Request $request, File $file){
 
@@ -57,7 +65,7 @@ class CommentController extends Controller
         return redirect()->route('file.info', ['id' => $comment->file_id])->with('message', 'El comentario ha sido añadido');
     }
 
-
+    // acutaliza el comentario
 
     public function update($id){
 
